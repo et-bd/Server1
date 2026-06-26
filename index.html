@@ -1,182 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For You...</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            font-family: 'Playfair Display', serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            /* Premium 4K romantic background from Unsplash */
-            background: url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=3840&auto=format&fit=crop') no-repeat center center/cover;
-        }
+  <meta charset="UTF-8">
+  <title>For You ❤️</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
 
-        /* Dark overlay to make the text pop and keep the premium vibe */
-        .overlay {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.4);
-            z-index: 1;
-        }
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      overflow: hidden;
+      color: white;
+    }
 
-        /* Glassmorphism container */
-        .container {
-            position: relative;
-            z-index: 2;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            padding: 4rem 5rem;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            color: #fff;
-            max-width: 500px;
-            width: 80%;
-            transition: opacity 0.5s ease;
-        }
+    .container {
+      text-align: center;
+      backdrop-filter: blur(20px);
+      background: rgba(255,255,255,0.08);
+      padding: 50px;
+      border-radius: 20px;
+      box-shadow: 0 0 40px rgba(255, 192, 203, 0.2);
+    }
 
-        h1 {
-            font-size: 2.8rem;
-            margin-bottom: 2.5rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-            letter-spacing: 1px;
-        }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      color: #ffb6c1;
+    }
 
-        .btn-group {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            height: 60px; /* Keeps layout stable when NO button moves */
-        }
+    .buttons {
+      position: relative;
+      height: 100px;
+    }
 
-        button {
-            padding: 12px 40px;
-            font-size: 1.3rem;
-            font-family: inherit;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            outline: none;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
+    button {
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s;
+      position: absolute;
+    }
 
-        /* Styling the Yes button */
-        #yesBtn {
-            background: linear-gradient(135deg, #ff7eb3 0%, #ff758c 100%);
-            color: white;
-            box-shadow: 0 4px 15px rgba(255, 117, 140, 0.4);
-        }
+    #yesBtn {
+      background: linear-gradient(45deg, #ff4e50, #ff6a88);
+      color: white;
+      left: 30%;
+    }
 
-        #yesBtn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(255, 117, 140, 0.6);
-        }
+    #yesBtn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px pink;
+    }
 
-        /* Styling the No button */
-        #noBtn {
-            background: rgba(255, 255, 255, 0.15);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(5px);
-            position: relative; /* Changes to absolute dynamically via JS */
-            z-index: 10;
-        }
+    #noBtn {
+      background: transparent;
+      border: 2px solid #fff;
+      color: white;
+      left: 60%;
+    }
 
-        /* Success Message Container (Hidden by default) */
-        #successMessage {
-            display: none;
-        }
+    /* second page */
+    .message {
+      display: none;
+      font-size: 2rem;
+      color: #ffb6c1;
+      animation: fadeIn 1.5s ease;
+    }
 
-        #successMessage h1 {
-            font-size: 3.5rem;
-            color: #ff7eb3;
-            text-shadow: 0 0 15px rgba(255, 126, 179, 0.5);
-            margin-bottom: 1rem;
-        }
-
-        #successMessage p {
-            font-size: 1.8rem;
-            font-style: italic;
-            margin: 0;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-        }
-    </style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.8);}
+      to { opacity: 1; transform: scale(1);}
+    }
+  </style>
 </head>
+
 <body>
 
-    <div class="overlay"></div>
+<div class="container" id="main">
+  <h1>Do you like me? ❤️</h1>
 
-    <div class="container" id="questionContainer">
-        <h1>Do you like me? 🤍</h1>
-        <div class="btn-group">
-            <button id="yesBtn">Yes</button>
-            <button id="noBtn">No</button>
-        </div>
-    </div>
+  <div class="buttons">
+    <button id="yesBtn">Yes 💖</button>
+    <button id="noBtn">No 😢</button>
+  </div>
+</div>
 
-    <div class="container" id="successMessage">
-        <h1>Thankuuu! 💖</h1>
-        <p>I like you too!</p>
-    </div>
+<div class="container message" id="messageBox">
+  Thank you... I like you too ❤️✨
+</div>
 
-    <script>
-        const noBtn = document.getElementById('noBtn');
-        const yesBtn = document.getElementById('yesBtn');
-        const questionContainer = document.getElementById('questionContainer');
-        const successMessage = document.getElementById('successMessage');
+<script>
+  const noBtn = document.getElementById("noBtn");
+  const yesBtn = document.getElementById("yesBtn");
 
-        // Function to make the "No" button run away
-        const moveNoButton = () => {
-            // Change position to fixed so it can roam anywhere on the screen
-            noBtn.style.position = 'fixed';
-            
-            // Get current window dimensions
-            const windowWidth = window.innerWidth;
-            const windowHeight = window.innerHeight;
-            
-            // Get button dimensions
-            const btnWidth = noBtn.offsetWidth;
-            const btnHeight = noBtn.offsetHeight;
+  // NO button runs away
+  noBtn.addEventListener("mouseover", () => {
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 100);
 
-            // Calculate random coordinates (keeping the button within the screen bounds)
-            const randomX = Math.max(0, Math.floor(Math.random() * (windowWidth - btnWidth)));
-            const randomY = Math.max(0, Math.floor(Math.random() * (windowHeight - btnHeight)));
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+  });
 
-            // Apply new coordinates
-            noBtn.style.left = randomX + 'px';
-            noBtn.style.top = randomY + 'px';
-        };
+  // YES button action
+  yesBtn.addEventListener("click", () => {
+    document.getElementById("main").style.display = "none";
+    document.getElementById("messageBox").style.display = "block";
+  });
+</script>
 
-        // Listen for mouse hover (desktop) and touch (mobile)
-        noBtn.addEventListener('mouseover', moveNoButton);
-        noBtn.addEventListener('touchstart', (e) => {
-            e.preventDefault(); // Stops them from actually tapping it
-            moveNoButton();
-        });
-
-        // Handle the "Yes" button click
-        yesBtn.addEventListener('click', () => {
-            // Hide the question container and show the success message
-            questionContainer.style.display = 'none';
-            successMessage.style.display = 'block';
-            
-            // Hide the No button completely just to be safe
-            noBtn.style.display = 'none';
-        });
-    </script>
 </body>
 </html>
